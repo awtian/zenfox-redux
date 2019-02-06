@@ -1,3 +1,5 @@
+import {TOGGLE_SHOW, CHANGE_NAME} from '../actionTypes'
+
 const defaultState = {
   name: 'ZenFox',
   show: true
@@ -6,12 +8,12 @@ const defaultState = {
 export default function (state=defaultState, action) {
   const {type, payload} = action;
   switch (type) {
-    case 'TOGGLE_SHOW':
+    case TOGGLE_SHOW:
       return ({
         ...state,
         show: !state.show,
       })
-    case 'CHANGE_NAME':
+    case CHANGE_NAME:
       return ({
         ...state,
         name: payload

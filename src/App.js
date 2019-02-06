@@ -26,7 +26,7 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Home} />
               <Route exact path='/about' component={About} />
-              <Route path='/hehe/:name' component={(props) =>{ props.history.push('/about')
+              <Route path='/hehe/:name' component={(props) => {
                                                             return <h1>{JSON.stringify(props)}</h1>
                                                             }} />
               <Route component={() => <h1>404</h1>} />

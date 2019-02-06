@@ -19,8 +19,8 @@ class About extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  name: state.name,
-  show: state.show
+  name: state.name.name,
+  show: state.name.show
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({toggleShow, changeName}, dispatch)
