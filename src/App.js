@@ -11,6 +11,9 @@ import store from './store'
 import Home from './containers/Home'
 import About from './containers/About'
 import Navbar from './containers/Navbar'
+import Family from './containers/Family'
+
+import MyProvider from './ContextProvider'
 
 class App extends Component {
   state = {
@@ -19,22 +22,24 @@ class App extends Component {
   
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Navbar />
-            <Switch>
-              <Route exact path='/' component={Home} />
-              <Route exact path='/about' component={About} />
-              <Route path='/hehe/:name' component={(props) => {
-                                                            return <h1>{JSON.stringify(props)}</h1>
-                                                            }} />
-              <Route component={() => <h1>404</h1>} />
-            </Switch>
-          </div>
-        </Router>
-
-      </Provider>
+      <MyProvider>
+        <Provider store={store}>
+          <Router>
+            <div className="App">
+              <Navbar />
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/about' component={About} />
+                <Route path='/hehe/:name' component={(props) => {
+                                                              return <h1>{JSON.stringify(props)}</h1>
+                                                              }} />
+                <Route path='/context' component={Family} />
+                <Route component={() => <h1>404</h1>} />
+              </Switch>
+            </div>
+          </Router>
+        </Provider>
+      </MyProvider>
     );
   }
 }

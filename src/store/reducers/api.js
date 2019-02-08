@@ -1,5 +1,3 @@
-import { pairs } from "rxjs";
-
 const defaultState = {
   heroes: [],
   loading: false,

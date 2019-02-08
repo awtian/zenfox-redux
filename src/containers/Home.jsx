@@ -10,13 +10,17 @@ class Home extends Component {
 
   render() {
     const {loading, error, heroes} = this.props
+    let heroesData = null
+    if (!loading && !error) {
+      heroesData = heroes.map(hero => (
+        <h1 key={hero.localized_name} style={{marginTop: '0px'}}><img src={'https://api.opendota.com' + hero.icon} alt="hero-icon"/><Link to={'/hehe/'+hero.localized_name}>{hero.localized_name}</Link></h1>
+      ))
+    }
     return (
-      <div style={{backgroundColor: '#333'}}>
-        {loading && <h1>Tunggu dulu yach . . .</h1>}
+      <div style={{backgroundColor: '#333', marginTop: '0px'}}>
+        {loading && <h1 style={{color: "white"}}>Tunggu dulu yach . . .</h1>}
         {error && <h1>Sorik lah</h1>}
-        {heroes.map(hero => (
-          <h1><Link to={'/hehe/'+hero.localized_name}>{hero.localized_name}</Link></h1>
-        ))}
+        {heroesData}
       </div>
     )
   }
