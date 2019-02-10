@@ -17,6 +17,7 @@ export default class Navbar extends Component {
               <div style={{display:"flex", marginRight: '30px'}}>
                 <p><Link to="/">Home</Link></p>
                 <p><Link to="/about">About</Link></p>
+                <p><Link to="/testing">Testing</Link></p>
               </div>
             </main>
           </header>
