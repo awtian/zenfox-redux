@@ -3,14 +3,15 @@ import App from './App';
 
 import { shallow } from 'enzyme'
 
-describe('testing mounting', ()=>{
-  const wrapper = shallow(<App />)
-  test('it should render without crashing', () => {
-    expect(wrapper).toHaveLength(1)
-  })
+const wrapper = shallow(<App />)
 
-  test('it should have 6 route', () => {
-    const routerInWrapper = wrapper.find('Route')
-    expect(routerInWrapper).toHaveLength(6)
-  })
+// console.log(wrapper.debug())
+
+test('it should render correctly', () => {
+  expect(wrapper).toHaveLength(1)
 })
+
+test('should have a switch', () => {
+  const switchOnWrapper = wrapper.find('Switch')
+  expect(switchOnWrapper).toHaveLength(1)
+} )

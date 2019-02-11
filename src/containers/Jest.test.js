@@ -1,69 +1,70 @@
-import React from 'react';
-import Jest from './Jest';
-
-import { shallow } from 'enzyme';
+import React from 'react'
+import Jest from './Jest'
+import { shallow } from 'enzyme'
 
 const wrapper = shallow(<Jest />)
-test('render correctly', () => {
+
+test('it should render correctly', () => {
   expect(wrapper).toHaveLength(1)
 })
 
-test('Have a H1', () => {
-  const h1InsideWrapper = wrapper.find('h1')
-  expect(h1InsideWrapper).toHaveLength(1)
+test('have one h1', () => {
+  const h1OnWrapper = wrapper.find('h1')
+  expect(h1OnWrapper).toHaveLength(1)
 })
 
-test('Have an ul', () => {
-  const ulInsideWrapper = wrapper.find('ul')
-  expect(ulInsideWrapper).toHaveLength(1)
+test('have one p', () => {
+  const pOnWrapper = wrapper.find('p')
+  expect(pOnWrapper).toHaveLength(1)
 })
 
-test('Have 3 li inside an ul', () => {
-  const ulInsideWrapper = wrapper.find('ul')
-  const liInsideUl = ulInsideWrapper.find('li') 
+test('have one ul', () => {
+  const ulOnWrapper = wrapper.find('ul')
+  expect(ulOnWrapper).toHaveLength(1)
+})
+
+test('have three li inside a ul', () => {
+  const ulOnWrapper = wrapper.find('ul')
+  const liInsideUl = ulOnWrapper.find('li')
   expect(liInsideUl).toHaveLength(3)
 })
 
-// Test State
+// State Testing 
 
-test('its started with three todo on the state', () => {
-  const todosState = wrapper.state('todos')
-  expect(todosState).toHaveLength(3)
+test('it should have todos state', () => {
+  const todos = wrapper.state('todos')
+  expect(todos).toHaveLength(3)
 })
 
+// Event Testing
 
-//test events 
-test('it add new todo when newTodo is called', () => {
-  const newTodo = {
-    id: 4,
-    name: 'Testing'
-  }
+test('Add Todo Should add todo', () => {
+  const newTodo = {id: 4, name: 'TESTING'}
   wrapper.instance().addTodo(newTodo)
-  const todosState = wrapper.state('todos');
-  expect(todosState).toHaveLength(4)
-
+  const todos = wrapper.state('todos')
+  expect(todos).toHaveLength(4)
 })
 
-test('delete 2 todos', () => {
+test('removeTodo should delete two todo', () => {
   wrapper.instance().removeTodo(1)
   wrapper.instance().removeTodo(2)
-  const todosState = wrapper.state('todos')
-  expect(todosState).toHaveLength(2)
+  const todos = wrapper.state('todos')
+  expect(todos).toHaveLength(2)
+  expect(todos[1].name).toEqual('TESTING')
 })
 
-test('simulate click on delete button', () => {
-  const button = wrapper.find('.deleteTodo').at(0)
-  button.simulate('click')
-  const todosState = wrapper.state('todos')
-  expect(todosState).toHaveLength(1)
+test('clicking delete button should trigger removal', () => {
+  const deleteButton = wrapper.find('.deleteTodo').at(0)
+  deleteButton.simulate('click')
+  const todos = wrapper.state('todos')
+  expect(todos).toHaveLength(1)
+  expect(todos[0].name).toEqual('TESTING')
 })
 
-//props testing
-test('recieve props username', () => {
-  const username = 'awxm'
-  const wrapperWithProps = shallow(<Jest username={username}/>)
-  const usernameProps = wrapperWithProps.instance().props.username
-  expect(usernameProps).toBe(username)
-  const isAString = typeof usernameProps === 'string'
-  expect(isAString).toBeTruthy()
+test('props', () => {
+  const username = 'awtian'
+  const wrapperWithNameProps = shallow(<Jest username={username}/>)
+  const props = wrapperWithNameProps.instance().props
+  // console.log(props)
+  expect(props.username).toEqual(username)
 })
