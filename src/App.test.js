@@ -1,9 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
-});
+import { shallow } from 'enzyme'
+
+describe('testing mounting', ()=>{
+  const wrapper = shallow(<App />)
+  test('it should render without crashing', () => {
+    expect(wrapper).toHaveLength(1)
+  })
+
+  test('it should have 6 route', () => {
+    const routerInWrapper = wrapper.find('Route')
+    expect(routerInWrapper).toHaveLength(6)
+  })
+})
